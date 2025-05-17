@@ -1,114 +1,112 @@
-Solana Real-Time Event Monitoring MCP
-License: MIT | Python 3.9+ | Docker Support | Powered by FastMCP
-The Story: Bringing Blockchain to Life
+# ⚡ Solana Real-Time Event Monitoring MCP
 
-Jane was building an AI trading agent that needed to react instantly to on-chain events. Traditional polling solutions were too slow and unreliable. "If only there was a way to stream blockchain data directly to my agent," she thought. The next morning, she discovered Solana Real-Time Event Monitoring MCP. Within minutes, her agent was receiving live account updates, transaction confirmations, and program logs, allowing it to execute trades with unprecedented speed and precision. What used to take seconds or minutes now happened in milliseconds.
+**License**: MIT | **Python** 3.9+ | Powered by **FastMCP**
 
-Overview
-Solana Real-Time Event Monitoring MCP is a powerful WebSocket-based microservice that transforms Solana's real-time blockchain data into structured, consumable streams for AI applications, agents, and monitoring systems. It leverages the FastMCP framework to provide reliable, persistent connections to the Solana blockchain, delivering critical on-chain events directly to your applications as they happen.
-This project serves as a bridge between Solana's WebSocket API and modern AI-driven applications, enabling real-time decision making, monitoring, and analysis based on blockchain activity. By wrapping Solana's WebSocket endpoints in a standardized MCP (Microservice Communication Protocol) format, developers can easily integrate live blockchain data into their systems without managing complex WebSocket connections or handling reconnection logic.
-Features
+---
 
-Account Monitoring: Subscribe to changes for any Solana account and receive immediate notifications when data changes.
-Transaction Tracking: Follow transaction signatures from submission to finalization across different commitment levels.
-Program Logs: Stream logs from specific programs or the entire Solana network with customizable filters.
-Real-time Data Streams: Receive data via asynchronous generators, perfect for AI agents that need to react to events.
-Commitment Level Selection: Choose between processed, confirmed, and finalized commitment levels.
-Flexible Data Encoding: Support for various encoding formats including base64, base58, and jsonParsed.
-Error Handling: Robust error management with informative error messages.
-Multi-client Support: Designed to handle multiple concurrent connections efficiently.
+## 🌟 The Story: Bringing Blockchain to Life
 
-Installation
-Prerequisites
+Jane was building an AI trading agent that needed to react instantly to on-chain events. Traditional polling solutions were too slow and unreliable.
 
-Python 3.9 or higher
-pip (Python package installer)
+> "If only there was a way to stream blockchain data directly to my agent," she thought.
 
-Option 1: Local Installation
-bash# Clone the repository
+The next morning, she discovered **Solana Real-Time Event Monitoring MCP**. Within minutes, her agent was receiving live account updates, transaction confirmations, and program logs—executing trades with unprecedented speed and precision. What used to take seconds or minutes now happened in milliseconds.
+
+---
+
+## 🧠 Overview
+
+**Solana Real-Time Event Monitoring MCP** is a WebSocket-powered microservice that transforms Solana’s real-time blockchain data into structured, AI-friendly streams. Built on the **FastMCP** framework, it bridges Solana’s WebSocket API with modern AI agents and monitoring systems.
+
+No more juggling raw sockets or reconnection logic—just plug in and stream on-chain events in real-time.
+
+---
+
+## 🚀 Features
+
+- 🔄 **Account Monitoring** – Get notified immediately on account changes.
+- 🧾 **Transaction Tracking** – Follow transactions from submission to finalization.
+- 📦 **Program Logs** – Filter and stream logs from any program or network-wide.
+- 📡 **Real-Time Streams** – Seamless integration using async generators.
+- 🛠️ **Commitment Levels** – Choose from processed, confirmed, or finalized.
+- 🧬 **Flexible Encodings** – base64, base58, and jsonParsed support.
+- ⚙️ **Robust Error Handling** – Informative and fail-safe.
+- 🧍‍♂️ **Multi-client Support** – Scales effortlessly for concurrent connections.
+
+---
+
+## 📦 Installation
+
+### Prerequisites
+
+- Python 3.9+
+- pip (Python package manager)
+
+### Option: Local Installation
+
+```bash
+# Clone the repository
 git clone https://github.com/yourusername/solana-realtime-monitor-mcp.git
 cd solana-realtime-monitor-mcp
 
-# Create a virtual environment and install dependencies
+# Set up a virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
 
 # Run the server
 python main.py
-Option 2: Docker Installation
-bash# Clone the repository
-git clone https://github.com/yourusername/solana-realtime-monitor-mcp.git
-cd solana-realtime-monitor-mcp
+```
 
-# Build the Docker image
-docker build -t solana-realtime-monitor-mcp .
+---
 
-# Run the container
-docker run -p 8081:8081 solana-realtime-monitor-mcp
-Configuration
-Configure the Solana connection to use mainnet:
-python# Edit these variables in main.py
-SOLANA_WS_URL = "wss://api.mainnet-beta.solana.com/"  # Official Solana mainnet RPC
-MCP_HOST = "127.0.0.1"  # The host address to bind the MCP server
-MCP_PORT = 8081         # The port to expose the MCP server
-For production applications, we strongly recommend using a dedicated RPC provider:
-python# Replace with your dedicated RPC provider URL
-SOLANA_WS_URL = "wss://YOUR_PROVIDER_URL/..."  # Examples include:
-# - QuickNode: "wss://YOUR_QUICKNODE_URL/..."
-# - Alchemy: "wss://YOUR_ALCHEMY_URL/..."
-# - Ankr: "wss://YOUR_ANKR_URL/..."
-# - Triton: "wss://YOUR_TRITON_URL/..."
-When using mainnet, consider these additional configuration best practices:
+## ⚙️ Configuration
 
-Connection Resilience: Implement automatic reconnection with exponential backoff
-Error Handling: Add more robust error handling for production environments
-Rate Limiting: Be aware of RPC provider rate limits and implement appropriate throttling
-Load Balancing: For high-volume applications, consider implementing RPC endpoint rotation
+Edit the connection variables in `main.py`:
 
-Usage
-Once the server is running, it exposes several tools that can be used to monitor Solana blockchain activity:
-Available Tools
+```python
+SOLANA_WS_URL = "wss://api.mainnet-beta.solana.com/"
+MCP_HOST = "127.0.0.1"
+MCP_PORT = 8081
+```
 
-subscribe_to_account_updates: Stream real-time account data changes.
-subscribe_to_signature_status: Monitor transaction status changes.
-subscribe_to_logs: Stream program execution logs.
+### Use a Dedicated RPC Provider for Production
 
-Example: Monitoring a Token Account with Python
-pythonimport asyncio
-import json
-import httpx
-from sse_client.async_client import EventSource
+```python
+SOLANA_WS_URL = "wss://YOUR_PROVIDER_URL/..."
+# e.g.
+# QuickNode: "wss://YOUR_QUICKNODE_URL/..."
+# Alchemy:   "wss://YOUR_ALCHEMY_URL/..."
+# Ankr:      "wss://YOUR_ANKR_URL/..."
+# Triton:    "wss://YOUR_TRITON_URL/..."
+```
 
-async def monitor_token_account(account_pubkey):
-    # Initialize the streaming connection
-    url = f"http://localhost:8081/tools/subscribe_to_account_updates"
-    params = {
-        "account_pubkey": account_pubkey,
-        "commitment": "confirmed",
-        "encoding": "jsonParsed"
-    }
-    
-    async with httpx.AsyncClient() as client:
-        # Create a streaming connection
-        async with client.stream("POST", url, json=params, timeout=None) as response:
-            async for line in response.aiter_lines():
-                if line.strip():
-                    try:
-                        data = json.loads(line)
-                        print(f"Update received: {json.dumps(data, indent=2)}")
-                        
-                        # Process the data (example)
-                        if "params" in data and "result" in data["params"]:
-                            account_data = data["params"]["result"]["value"]
-                            print(f"Balance: {account_data.get('lamports', 0)}")
-                    except json.JSONDecodeError:
-                        print(f"Invalid JSON: {line}")
+💡 **Tips for Production**:
+- 📶 Add reconnection logic with exponential backoff
+- 🔐 Harden error handling
+- 🚦 Monitor rate limits and throttle requests
+- 🧭 Rotate endpoints for load balancing
 
-# Example: Monitor the SOL token mint account
-asyncio.run(monitor_token_account("So11111111111111111111111111111111111111112"))
-Example: Using with LangChain
-pythonfrom langchain.agents import load_tools
+---
+
+## 🧪 Usage
+
+Once the server is running at `http://localhost:8081`, it exposes real-time Solana monitoring tools:
+
+### 🔧 Available Tools
+
+- `subscribe_to_account_updates` – Monitor account changes
+- `subscribe_to_signature_status` – Track transaction status
+- `subscribe_to_logs` – Stream logs for specific programs
+
+---
+
+## 🧠 Example: LangChain Integration
+
+```python
+from langchain.agents import load_tools
 from langchain.agents import initialize_agent
 from langchain.llms import OpenAI
 
@@ -121,104 +119,85 @@ agent = initialize_agent(tools, llm, agent="zero-shot-react-description", verbos
 
 # Run the agent with a Solana-related query
 response = agent.run("Monitor the USDC token account on Solana and alert me if the balance changes")
-Example: Monitoring Program Logs
-pythonimport asyncio
-import json
-import httpx
+```
 
-async def monitor_token_program_logs():
-    # SPL Token Program ID
-    token_program_id = "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-    
-    url = f"http://localhost:8081/tools/subscribe_to_logs"
-    params = {
-        "filter_criteria": {"mentions": [token_program_id]},
-        "commitment": "confirmed"
-    }
-    
-    async with httpx.AsyncClient() as client:
-        async with client.stream("POST", url, json=params, timeout=None) as response:
-            async for line in response.aiter_lines():
-                if line.strip():
-                    try:
-                        data = json.loads(line)
-                        
-                        # Check for token transfer logs
-                        if "params" in data and "result" in data["params"]:
-                            logs = data["params"]["result"]["value"]["logs"]
-                            if any("Transfer" in log for log in logs):
-                                print("Token transfer detected!")
-                                print(f"Logs: {logs}")
-                    except json.JSONDecodeError:
-                        pass
+---
 
-# Monitor all SPL token transfers
-asyncio.run(monitor_token_program_logs())
-Architecture
-Solana Real-Time Event Monitoring MCP is built using a modular architecture that abstracts the complexities of WebSocket connections:
-Core Components
+## 🏗️ Architecture
 
-WebSocket Client: Manages persistent connections to Solana's WebSocket API with automatic reconnection.
-FastMCP Server: Exposes the WebSocket streams as standardized tools via HTTP with Server-Sent Events.
-Async Generators: Transforms WebSocket events into asynchronous generators for easy consumption.
-Error Handling: Comprehensive error handling with informative error messages.
+**Core Components**:
 
-Data Flow
-  Solana Node      WebSocket Client      FastMCP API        Client Apps   
-  (WebSocket) <---> (Subscription) <---> (SSE Stream) <---> & AI Agents
+- 🌐 WebSocket Client – Persistent Solana connections
+- 🚀 FastMCP Server – Wraps streams via HTTP (SSE)
+- 🔁 Async Generators – Streamline WebSocket events
+- ❌ Error Handler – Rich, user-friendly messages
 
-The FastMCP server receives a tool request from a client app or AI agent.
-It establishes a WebSocket connection to the specified Solana node.
-The subscription is created and a WebSocket connection is maintained.
-Real-time updates are streamed from Solana to the client via Server-Sent Events.
-The connection persists until the client disconnects or an error occurs.
+### 🔄 Data Flow:
 
-Tool Details
-subscribe_to_account_updates
-Monitors changes to a Solana account in real-time.
-Parameters:
+```
+Solana Node <---> WebSocket Client <---> FastMCP API <---> AI Agents
+```
 
-account_pubkey (string): The account public key to monitor (base58 encoded)
-commitment (string, optional): Commitment level - "processed", "confirmed", or "finalized"
-encoding (string, optional): Data encoding - "base64", "base58", "jsonParsed", or "base64+zstd"
+---
 
-Example Use Cases:
+## 🧰 Tool Details
 
-Track token account balance changes
-Monitor NFT metadata updates
-Detect smart contract state changes
+### `subscribe_to_account_updates`
 
-subscribe_to_signature_status
-Tracks a transaction from submission to confirmation.
-Parameters:
+Monitors real-time account changes.
 
-signature (string): The transaction signature to monitor (base58 encoded)
-commitment (string, optional): Commitment level - "processed", "confirmed", or "finalized"
+**Parameters**:
+- `account_pubkey` (string): Account address (base58)
+- `commitment` (optional): processed | confirmed | finalized
+- `encoding` (optional): base64 | base58 | jsonParsed | base64+zstd
 
-Example Use Cases:
+🔍 **Use Cases**:
+- Track token/NFT balance changes
+- Detect smart contract state updates
 
-Verify payment completion
-Monitor transaction finality
-Trigger actions after transaction confirmation
+---
 
-subscribe_to_logs
-Streams program execution logs in real-time.
-Parameters:
+### `subscribe_to_signature_status`
 
-filter_criteria (object): Either {"all": true} or {"mentions": ["Program1", "Program2"]}
-commitment (string, optional): Commitment level - "processed", "confirmed", or "finalized"
+Tracks transaction status.
 
-Example Use Cases:
+**Parameters**:
+- `signature` (string): Transaction signature
+- `commitment` (optional): processed | confirmed | finalized
 
-Monitor smart contract events
-Debug program executions
-Track cross-program interactions
+🔍 **Use Cases**:
+- Monitor payment status
+- Trigger actions post-finalization
 
-Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-Acknowledgments
+---
 
-FastMCP Framework for providing the MCP server implementation
-Solana Labs for their WebSocket API documentation
+### `subscribe_to_logs`
+
+Streams logs from programs.
+
+**Parameters**:
+- `filter_criteria`: `{"all": true}` or `{"mentions": ["Program1"]}`
+- `commitment` (optional): processed | confirmed | finalized
+
+🔍 **Use Cases**:
+- Trace smart contract events
+- Debug program logic
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! Fork, improve, and PR.
+
+---
+
+## 📄 License
+
+MIT – see the [LICENSE](LICENSE) file.
+
+---
+
+## 🙏 Acknowledgments
+
+- 🧠 **FastMCP** 
+- 🛠️ **Solana Labs** 
