@@ -5,7 +5,7 @@ from typing import Any, AsyncGenerator, Dict, List, Optional
 from mcp.server.fastmcp import FastMCP
 
 # --- Configuration ---
-SOLANA_WS_URL = "wss://api.devnet.solana.com/"
+SOLANA_WS_URL = "wss://api.mainnet-beta.solana.com/"
 MCP_HOST = "127.0.0.1"
 MCP_PORT = 8081
 MCP_SERVER_NAME = "solana-realtime-monitor-mcp"
